@@ -3,6 +3,10 @@ import { defaultTheme } from './styles/themes/default'
 import { GlobalStyle } from './styles/globalStyle'
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
+import { mockApi } from './service/api'
+
+mockApi()
+
 export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>

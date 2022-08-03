@@ -1,21 +1,32 @@
 import { Plus, Minus, ShoppingCartSimple } from 'phosphor-react'
-import { Coffe, CoffeImage, Description, Buy, Actions, Counter } from './styles'
-import expresso from '../../assets/images/Expresso.svg'
-export function CoffeCard() {
+import { Coffe } from '../../pages/Home'
+import { Card, CoffeImage, Description, Buy, Actions, Counter } from './styles'
+
+interface CoffeCardProps {
+  coffe: Coffe
+}
+export function CoffeCard({ coffe }: CoffeCardProps) {
   return (
-    <Coffe>
+    <Card>
       <CoffeImage>
-        <img src={expresso} alt="" />
-        <p>
-          <span>Tradicional</span>
-        </p>
+        <img src={coffe.imageURL} alt="" />
+        <div>
+          {coffe.tags.map((tag) => {
+            return <span key={tag}>{tag.toUpperCase()}</span>
+          })}
+        </div>
       </CoffeImage>
       <Description>
-        <h3>Expresso Tradicional</h3>
-        <p>O tradicional cafe feito com agua quente e graos moidos</p>
+        <h3>{coffe.name}</h3>
+        <p>{coffe.description}</p>
       </Description>
       <Buy>
-        <p>R$ 9,90</p>
+        <p>
+          {new Intl.NumberFormat('pt-BR', {
+            style: 'currency',
+            currency: 'BRL',
+          }).format(coffe.price)}
+        </p>
         <Actions>
           <Counter>
             <button>
@@ -29,6 +40,6 @@ export function CoffeCard() {
           <ShoppingCartSimple size={38} weight="fill" />
         </Actions>
       </Buy>
-    </Coffe>
+    </Card>
   )
 }

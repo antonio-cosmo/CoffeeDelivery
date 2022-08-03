@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const Coffe = styled.li`
+export const Card = styled.li`
   display: inline-block;
   width: 16rem;
   text-align: center;
@@ -14,13 +14,24 @@ export const Coffe = styled.li`
 
 export const CoffeImage = styled.div`
   margin-top: -20px;
-  span {
-    display: inline-block;
-    font-size: 10px;
-    color: ${(props) => props.theme['yellow-dark']};
-    padding: 4px 8px;
-    border-radius: 100px;
-    background: ${(props) => props.theme['yellow-light']};
+  img {
+    margin-bottom: 10px;
+  }
+  div {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      display: inline-block;
+      font-size: 10px;
+      color: ${(props) => props.theme['yellow-dark']};
+      padding: 4px 8px;
+      border-radius: 100px;
+      background: ${(props) => props.theme['yellow-light']};
+    }
   }
 `
 export const Description = styled.div`

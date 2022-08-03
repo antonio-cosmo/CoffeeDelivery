@@ -9,7 +9,28 @@ import {
 } from './styles'
 import coffeImg from '../../assets/images/Coffe.svg'
 import { CoffeCard } from '../../components/CoffeCard'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+
+export interface Coffe {
+  id: string
+  imageURL: string
+  tags: string[]
+  name: string
+  description: string
+  price: number
+}
 export function Home() {
+  const [coffes, setCoffes] = useState<Coffe[]>([])
+
+  useEffect(() => {
+    ;(async () => {
+      const res = await axios.get('/api/coffes/')
+      const { coffes } = res.data
+      setCoffes(coffes)
+    })()
+  }, [])
+
   return (
     <HomeContainer>
       <Banner>
@@ -52,15 +73,9 @@ export function Home() {
       <ListCoffe>
         <h2>Nossos cafés</h2>
         <ul>
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
-          <CoffeCard />
+          {coffes.map((coffe) => {
+            return <CoffeCard key={coffe.id} coffe={coffe} />
+          })}
         </ul>
       </ListCoffe>
     </HomeContainer>
