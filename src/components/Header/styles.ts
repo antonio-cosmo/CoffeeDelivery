@@ -4,9 +4,8 @@ export const HeaderContainer = styled.header`
   display: flex;
   align-items: center;
   justify-content: space-between;
-
+  background: ${(props) => props.theme.background};
   padding: 2rem 0;
-
   span {
     img {
       width: 85px;

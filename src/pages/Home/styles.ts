@@ -70,11 +70,19 @@ export const Beneficios = styled.div`
 `
 
 export const ListCoffe = styled.div`
+  margin-bottom: 6rem;
   h2 {
     font-size: 32px;
     font-family: 'Baloo 2', cursive;
     color: ${(props) => props.theme['base-subtitle']};
     line-height: 1.3;
     font-weight: 800;
+  }
+  ul {
+    list-style: none;
+    margin-top: 14px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
   }
 `

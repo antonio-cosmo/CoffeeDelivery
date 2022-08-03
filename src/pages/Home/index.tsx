@@ -8,6 +8,7 @@ import {
   ListCoffe,
 } from './styles'
 import coffeImg from '../../assets/images/Coffe.svg'
+import { CoffeCard } from '../../components/CoffeCard'
 export function Home() {
   return (
     <HomeContainer>
@@ -50,7 +51,17 @@ export function Home() {
 
       <ListCoffe>
         <h2>Nossos cafés</h2>
-        <ul></ul>
+        <ul>
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+          <CoffeCard />
+        </ul>
       </ListCoffe>
     </HomeContainer>
   )
