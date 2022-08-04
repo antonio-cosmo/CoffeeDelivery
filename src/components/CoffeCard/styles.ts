@@ -4,7 +4,7 @@ export const Card = styled.li`
   display: inline-block;
   width: 16rem;
   text-align: center;
-
+  position: relative;
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
   border-top-right-radius: 36px;
@@ -69,7 +69,7 @@ export const Counter = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
+  gap: 8px;
   background: ${(props) => props.theme['base-button']};
   padding: 9px;
   border-radius: 6px;
@@ -93,14 +93,59 @@ export const Counter = styled.div`
 `
 export const Actions = styled.div`
   display: flex;
-  align-items: center;
+  align-items: stretch;
   justify-content: center;
   gap: 8px;
-
+`
+export const ButtonCart = styled.button`
+  background: none;
+  border: none;
+  line-height: 0;
   & > svg {
     padding: 8px;
     color: ${(props) => props.theme['base-card']};
     background: ${(props) => props.theme['purple-dark']};
     border-radius: 6px;
+  }
+`
+
+export const CheckboxContainer = styled.label`
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 10px;
+  input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+
+  input:checked ~ span {
+    background-color: blue;
+  }
+
+  input:checked ~ span:after {
+    display: block;
+  }
+
+  span {
+    width: 0;
+    height: 0;
+  }
+
+  span:hover {
+    cursor: pointer;
+  }
+
+  span:after {
+    content: '';
+    display: none;
+    width: 8px;
+    height: 12px;
+    border: solid ${(props) => props.theme.purple};
+    border-width: 0 4px 4px 0;
+    transform: rotate(45deg);
   }
 `

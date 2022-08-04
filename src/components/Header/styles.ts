@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
-export const HeaderContainer = styled.header`
+interface HeaderProps {
+  cartSize: number
+}
+export const HeaderContainer = styled.header<HeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -27,8 +30,8 @@ export const HeaderContainer = styled.header`
         }
 
         &::after {
-          display: none;
-          content: '3';
+          display: ${(props) => (props.cartSize > 0 ? 'flex' : 'none')};
+          content: '${(props) => props.cartSize}';
           justify-content: center;
           align-items: center;
           width: 20px;

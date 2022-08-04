@@ -19,6 +19,14 @@ export function mockApi() {
       this.get('/coffes', () => {
         return this.schema.all('coffe')
       })
+
+      this.get('/coffes/:id', (schema, resquest) => {
+        const coffeID = resquest.params.id
+        const coffeExist = schema.find('coffe', coffeID)
+
+        if (coffeExist) return coffeExist
+        return null
+      })
     },
   })
 }

@@ -4,6 +4,7 @@ import { GlobalStyle } from './styles/globalStyle'
 import { BrowserRouter } from 'react-router-dom'
 import { Router } from './Router'
 import { mockApi } from './service/api'
+import { CartProvider } from './context/Cart'
 
 mockApi()
 
@@ -11,7 +12,9 @@ export function App() {
   return (
     <ThemeProvider theme={defaultTheme}>
       <BrowserRouter>
-        <Router />
+        <CartProvider>
+          <Router />
+        </CartProvider>
       </BrowserRouter>
       <GlobalStyle />
     </ThemeProvider>
