@@ -5,7 +5,7 @@ export const HomeContainer = styled.div``
 export const Banner = styled.div`
   display: flex;
   gap: 3.5rem;
-  padding: 6rem 0;
+  padding: 12rem 0 6rem 0;
 `
 
 export const Text = styled.div`

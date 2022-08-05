@@ -1,4 +1,4 @@
-import { HeaderContainer } from './styles'
+import { HeaderContainer, Container } from './styles'
 import logoImg from '../../assets/images/Logo.svg'
 import { NavLink } from 'react-router-dom'
 import { ShoppingCart } from 'phosphor-react'
@@ -8,17 +8,19 @@ export function Header() {
 
   const cartSize = cart.length
   return (
-    <HeaderContainer cartSize={cartSize}>
-      <span>
-        <img src={logoImg} alt="" />
-      </span>
-      <nav>
+    <Container>
+      <HeaderContainer cartSize={cartSize}>
         <NavLink to="/">
-          <div>
-            <ShoppingCart size={22} weight="fill" />
-          </div>
+          <img src={logoImg} alt="" />
         </NavLink>
-      </nav>
-    </HeaderContainer>
+        <nav>
+          <NavLink to="/cart">
+            <div>
+              <ShoppingCart size={22} weight="fill" />
+            </div>
+          </NavLink>
+        </nav>
+      </HeaderContainer>
+    </Container>
   )
 }

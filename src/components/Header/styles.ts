@@ -1,15 +1,25 @@
 import styled from 'styled-components'
 
+export const Container = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 999;
+`
 interface HeaderProps {
   cartSize: number
 }
+
 export const HeaderContainer = styled.header<HeaderProps>`
   display: flex;
   align-items: center;
   justify-content: space-between;
   background: ${(props) => props.theme.background};
-  padding: 2rem 0;
-  span {
+  padding: 2rem;
+  max-width: 74rem;
+  margin: 0 auto;
+  a {
     img {
       width: 85px;
       height: 40px;

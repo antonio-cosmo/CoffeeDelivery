@@ -1,7 +1,22 @@
+import expresso from '../assets/images/Expresso.svg'
+import americano from '../assets/images/Americano.svg'
+import expressoCremoso from '../assets/images/ExpressoCremoso.svg'
+import cafeGelado from '../assets/images/CafeGelado.svg'
+import cafeComLeite from '../assets/images/CafeLeite.svg'
+import latte from '../assets/images/Latte.svg'
+import capuccino from '../assets/images/Capuccino.svg'
+import macchiato from '../assets/images/Macchiato.svg'
+import mocaccino from '../assets/images/Mocaccino.svg'
+import chocolateQuente from '../assets/images/ChocolateQuente.svg'
+import cubano from '../assets/images/Cubano.svg'
+import havaiano from '../assets/images/Havaiano.svg'
+import arabe from '../assets/images/Arabe.svg'
+import irlandes from '../assets/images/Irlandes.svg'
+
 export const coffes = [
   {
     id: 1,
-    imageURL: 'src/assets/images/Expresso.svg',
+    imageURL: expresso,
     tags: ['tradicional'],
     name: 'Expresso Tradicional',
     description: 'O tradicional café feito com água quente e grãos moídos',
@@ -10,7 +25,7 @@ export const coffes = [
 
   {
     id: 2,
-    imageURL: 'src/assets/images/Americano.svg',
+    imageURL: americano,
     tags: ['tradicional'],
     name: 'Expresso Americano',
     description: 'Expresso diluído, menos intenso que o tradicional',
@@ -18,7 +33,7 @@ export const coffes = [
   },
   {
     id: 3,
-    imageURL: 'src/assets/images/ExpressoCremoso.svg',
+    imageURL: expressoCremoso,
     tags: ['tradicional'],
     name: 'Expresso Cremoso',
     description: 'Café expresso tradicional com espuma cremosa',
@@ -26,7 +41,7 @@ export const coffes = [
   },
   {
     id: 4,
-    imageURL: 'src/assets/images/CafeGelado.svg',
+    imageURL: cafeGelado,
     tags: ['tradicional', 'gelado'],
     name: 'Expresso Gelado',
     description: 'Bebida preparada com café expresso e cubos de gelo',
@@ -34,7 +49,7 @@ export const coffes = [
   },
   {
     id: 5,
-    imageURL: 'src/assets/images/CafeLeite.svg',
+    imageURL: cafeComLeite,
     tags: ['tradicional', 'com leite'],
     name: 'Café com Leite',
     description: 'Meio a meio de expresso tradicional com leite vaporizado',
@@ -42,7 +57,7 @@ export const coffes = [
   },
   {
     id: 6,
-    imageURL: 'src/assets/images/Latte.svg',
+    imageURL: latte,
     tags: ['tradicional', 'com leite'],
     name: 'Latte',
     description:
@@ -51,7 +66,7 @@ export const coffes = [
   },
   {
     id: 7,
-    imageURL: 'src/assets/images/Capuccino.svg',
+    imageURL: capuccino,
     tags: ['tradicional', 'com leite'],
     name: 'Capuccino',
     description:
@@ -60,7 +75,7 @@ export const coffes = [
   },
   {
     id: 8,
-    imageURL: 'src/assets/images/Macchiato.svg',
+    imageURL: macchiato,
     tags: ['tradicional', 'com leite'],
     name: 'Macchiato',
     description:
@@ -69,7 +84,7 @@ export const coffes = [
   },
   {
     id: 9,
-    imageURL: 'src/assets/images/Mocaccino.svg',
+    imageURL: mocaccino,
     tags: ['tradicional', 'com leite'],
     name: 'Mocaccino',
     description: 'Café expresso com calda de chocolate, pouco leite e espuma',
@@ -77,7 +92,7 @@ export const coffes = [
   },
   {
     id: 10,
-    imageURL: 'src/assets/images/ChocolateQuente.svg',
+    imageURL: chocolateQuente,
     tags: ['tradicional', 'com leite'],
     name: 'Chocolate Quente',
     description: 'Bebida feita com chocolate dissolvido no leite quente e café',
@@ -85,7 +100,7 @@ export const coffes = [
   },
   {
     id: 11,
-    imageURL: 'src/assets/images/Cubano.svg',
+    imageURL: cubano,
     tags: ['especial', 'alcoólico', 'gelado'],
     name: 'Cubano',
     description:
@@ -94,7 +109,7 @@ export const coffes = [
   },
   {
     id: 12,
-    imageURL: 'src/assets/images/Havaiano.svg',
+    imageURL: havaiano,
     tags: ['especial'],
     name: 'Havaiano',
     description: 'Bebida adocicada preparada com café e leite de coco',
@@ -102,7 +117,7 @@ export const coffes = [
   },
   {
     id: 13,
-    imageURL: 'src/assets/images/Arabe.svg',
+    imageURL: arabe,
     tags: ['especial'],
     name: 'Árabe',
     description: 'Bebida preparada com grãos de café árabe e especiarias',
@@ -110,7 +125,7 @@ export const coffes = [
   },
   {
     id: 14,
-    imageURL: 'src/assets/images/Irlandes.svg',
+    imageURL: irlandes,
     tags: ['especial', 'alcoólico'],
     name: 'Irlandês',
     description: 'Bebida a base de café, uísque irlandês, açúcar e chantilly',
