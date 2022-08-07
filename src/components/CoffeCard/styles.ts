@@ -106,6 +106,10 @@ export const ButtonCart = styled.button`
     color: ${(props) => props.theme['base-card']};
     background: ${(props) => props.theme['purple-dark']};
     border-radius: 6px;
+    transition: 0.3s;
+    &:hover {
+      background: ${(props) => props.theme.purple};
+    }
   }
 `
 

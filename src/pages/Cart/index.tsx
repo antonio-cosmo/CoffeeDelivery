@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import {
   MapPinLine,
   CurrencyDollar,
@@ -5,104 +6,73 @@ import {
   Money,
   Bank,
 } from 'phosphor-react'
-import { useState } from 'react'
 import {
   Container,
-  FormContainer,
-  HeaderForm,
-  HeaderPay,
-  BodyForm,
-  GroupInput,
-  Pay,
-  PayTypeContainer,
-  RadioBox,
+  Checkout,
+  ItemsCart,
+  Card,
+  Items,
+  PayTotal,
+  ButtonConfirm,
 } from './styles'
-export function Cart() {
-  const [payType, setPayType] = useState('')
+import { Item } from './Item'
+import { useCartContext } from '../../context/Cart'
+import { priceFormat } from '../../util/priceFormat'
+import { FormCheckout } from './FormCheckout'
+import { Pay } from './Pay'
 
-  const handlePayType = (type: string) => {
-    setPayType(type)
-  }
+export function Cart() {
+  const { cart } = useCartContext()
+
+  const totalItems = cart.reduce((total, product) => {
+    const productTotal: number = product.price * product.amount
+
+    return (total += productTotal)
+  }, 0)
+
+  const taxa = 3.5
+
   return (
     <Container>
-      <div>
+      <Checkout>
         <h3>Complete seu pedido</h3>
-        <FormContainer>
-          <HeaderForm>
-            <MapPinLine size={22} />
-            <div>
-              <p>Endereço de Entrega</p>
-              <span>Informe o endereço onde deseja receber seu pedido</span>
-            </div>
-          </HeaderForm>
-          <BodyForm>
-            <label id="cep" htmlFor="cep">
-              <input id="cep" type="text" placeholder="CEP" />
-            </label>
-            <label id="rua" htmlFor="rua">
-              <input id="rua" type="text" placeholder="Rua" />
-            </label>
-            <GroupInput>
-              <label htmlFor="numero">
-                <input id="numero" type="text" placeholder="Número" />
-              </label>
-              <label htmlFor="complemento">
-                <input id="complemento" type="text" placeholder="Complemento" />
-              </label>
-            </GroupInput>
-            <GroupInput>
-              <label htmlFor="bairro">
-                <input id="bairro" type="text" placeholder="Bairro" />
-              </label>
-              <label htmlFor="cidade">
-                <input id="cidade" type="text" placeholder="Cidade" />
-              </label>
-              <label htmlFor="uf">
-                <input id="uf" type="text" placeholder="UF" />
-              </label>
-            </GroupInput>
-          </BodyForm>
-        </FormContainer>
-        <Pay>
-          <HeaderPay>
-            <CurrencyDollar size={22} />
-            <div>
-              <p>Pagamento</p>
-              <span>
-                O pagamento é feito na entrega. Escolha a forma que deseja pagar
-              </span>
-            </div>
-          </HeaderPay>
-          <PayTypeContainer>
-            <RadioBox
-              onClick={() => handlePayType('credito')}
-              isActive={payType === 'credito'}
-            >
-              <CreditCard size={16} />
-              <span>CARTÃO DE CRÉDITO</span>
-            </RadioBox>
-
-            <RadioBox
-              onClick={() => handlePayType('debito')}
-              isActive={payType === 'debito'}
-            >
-              <Bank size={16} />
-              <span>CARTÃO DE DEBITO</span>
-            </RadioBox>
-
-            <RadioBox
-              onClick={() => handlePayType('dinheiro')}
-              isActive={payType === 'dinheiro'}
-            >
-              <Money size={16} />
-              <span>DINHEIRO</span>
-            </RadioBox>
-          </PayTypeContainer>
-        </Pay>
-      </div>
-      <div>
+        <FormCheckout />
+        <Pay />
+      </Checkout>
+      <ItemsCart>
         <h3>Cafés selecionado</h3>
-      </div>
+        <Card>
+          <Items>
+            {cart.length > 0 ? (
+              cart.map((item) => {
+                return <Item key={item.id} product={item} />
+              })
+            ) : (
+              <p>Seu carrinho está vazio:</p>
+            )}
+          </Items>
+          <PayTotal>
+            <div>
+              <p>Total de itens</p>
+              <p>{priceFormat(totalItems)}</p>
+            </div>
+            <div>
+              <p>Entrega</p>
+              <p>{priceFormat(taxa)}</p>
+            </div>
+            <div>
+              <p>Total</p>
+              <p>
+                {cart.length > 0
+                  ? priceFormat(taxa + totalItems)
+                  : priceFormat(0)}
+              </p>
+            </div>
+          </PayTotal>
+
+          <ButtonConfirm type="button">CONFIRMAR PEDIDO</ButtonConfirm>
+        </Card>
+      </ItemsCart>
     </Container>
   )
 }

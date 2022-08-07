@@ -1,5 +1,6 @@
 import { Plus, Minus, ShoppingCartSimple } from 'phosphor-react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { Coffe } from '../../@types/coffe'
 import { useCartContext } from '../../context/Cart'
 import { priceFormat } from '../../util/priceFormat'
@@ -32,8 +33,10 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
 
   const isInCart = Boolean(cart.find((value) => value.id === coffe.id))
 
-  const handleAddProduct = (id: string, amount: number) => {
-    addProduct(id, amount)
+  const handleAddProduct = async (id: string, amount: number) => {
+    const res = await addProduct(id, amount)
+
+    toast[res.type](res.msg, { position: 'top-right' })
   }
 
   const handleIncrementProduct = () => {
