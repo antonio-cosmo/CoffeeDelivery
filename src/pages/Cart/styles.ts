@@ -53,7 +53,7 @@ export const ButtonConfirm = styled.button`
   color: ${(props) => props.theme.white};
   font-size: 14px;
   font-weight: 700;
-  transition: 0.3s;
+  transition: background 0.4s ease-in-out;
   &:hover {
     background: ${(props) => props.theme['yellow-dark']};
   }

@@ -1,12 +1,5 @@
 import { useState } from 'react'
 import {
-  MapPinLine,
-  CurrencyDollar,
-  CreditCard,
-  Money,
-  Bank,
-} from 'phosphor-react'
-import {
   Container,
   Checkout,
   ItemsCart,
@@ -18,7 +11,7 @@ import {
 import { Item } from './Item'
 import { useCartContext } from '../../context/Cart'
 import { priceFormat } from '../../util/priceFormat'
-import { FormCheckout } from './FormCheckout'
+import { CheckoutForm } from './CheckoutForm'
 import { Pay } from './Pay'
 
 export function Cart() {
@@ -36,7 +29,7 @@ export function Cart() {
     <Container>
       <Checkout>
         <h3>Complete seu pedido</h3>
-        <FormCheckout />
+        <CheckoutForm />
         <Pay />
       </Checkout>
       <ItemsCart>

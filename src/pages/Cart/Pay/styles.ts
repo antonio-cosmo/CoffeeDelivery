@@ -24,11 +24,11 @@ export const RadioBox = styled.button<RadioBoxProps>`
   background: ${(props) =>
     props.isActive ? props.theme['purple-light'] : props.theme['base-button']};
 
-  border-style: solid;
-  border-width: ${(props) => (props.isActive ? '1px' : 0)};
   border-color: ${(props) => props.theme.purple};
+  border-width: ${(props) => (props.isActive ? '1px' : 0)};
+  border-style: solid;
   border-radius: 6px;
-  transition: 300s;
+  transition: background 0.4s ease-in-out, color 0.4s ease-in-out;
   &:hover {
     background: ${(props) => props.theme['base-hover']};
     span {

@@ -5,9 +5,6 @@ import { PayContainer, HeaderPay, PayTypeContainer, RadioBox } from './styles'
 export function Pay() {
   const [payType, setPayType] = useState('')
 
-  const handlePayType = (type: string) => {
-    setPayType(type)
-  }
   return (
     <PayContainer>
       <HeaderPay>
@@ -21,7 +18,7 @@ export function Pay() {
       </HeaderPay>
       <PayTypeContainer>
         <RadioBox
-          onClick={() => handlePayType('credito')}
+          onClick={() => setPayType('credito')}
           isActive={payType === 'credito'}
         >
           <CreditCard size={16} />
@@ -29,7 +26,7 @@ export function Pay() {
         </RadioBox>
 
         <RadioBox
-          onClick={() => handlePayType('debito')}
+          onClick={() => setPayType('debito')}
           isActive={payType === 'debito'}
         >
           <Bank size={16} />
@@ -37,7 +34,7 @@ export function Pay() {
         </RadioBox>
 
         <RadioBox
-          onClick={() => handlePayType('dinheiro')}
+          onClick={() => setPayType('dinheiro')}
           isActive={payType === 'dinheiro'}
         >
           <Money size={16} />

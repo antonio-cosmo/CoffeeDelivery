@@ -1,7 +1,7 @@
 import { MapPinLine } from 'phosphor-react'
 import { FormContainer, BodyForm, GroupInput, HeaderForm } from './styles'
 
-export function FormCheckout() {
+export function CheckoutForm() {
   return (
     <FormContainer>
       <HeaderForm>
