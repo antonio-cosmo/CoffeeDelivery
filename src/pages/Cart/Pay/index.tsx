@@ -18,6 +18,7 @@ export function Pay() {
       </HeaderPay>
       <PayTypeContainer>
         <RadioBox
+          type="button"
           onClick={() => setPayType('credito')}
           isActive={payType === 'credito'}
         >
@@ -26,6 +27,7 @@ export function Pay() {
         </RadioBox>
 
         <RadioBox
+          type="button"
           onClick={() => setPayType('debito')}
           isActive={payType === 'debito'}
         >
@@ -34,6 +36,7 @@ export function Pay() {
         </RadioBox>
 
         <RadioBox
+          type="button"
           onClick={() => setPayType('dinheiro')}
           isActive={payType === 'dinheiro'}
         >

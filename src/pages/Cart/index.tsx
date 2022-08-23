@@ -63,7 +63,9 @@ export function Cart() {
             </div>
           </PayTotal>
 
-          <ButtonConfirm type="button">CONFIRMAR PEDIDO</ButtonConfirm>
+          <ButtonConfirm type="submit" form="checkout-form">
+            CONFIRMAR PEDIDO
+          </ButtonConfirm>
         </Card>
       </ItemsCart>
     </Container>

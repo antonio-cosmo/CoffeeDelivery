@@ -9,7 +9,9 @@ import {
 } from './styles'
 import imgEntregador from '../../../assets/images/Entrega.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
+import { useCartContext } from '../../../context/Cart'
 export function Success() {
+  const { dataCheckout } = useCartContext()
   return (
     <Conatainer>
       <TextSuccess>
@@ -22,9 +24,14 @@ export function Success() {
             <MapPin size={32} weight="fill" className="mapin" />
             <Text>
               <p>
-                Entrega em <Bold>Rua João Daniel Martinelli, 102</Bold>{' '}
+                Entrega em{' '}
+                <Bold>
+                  {dataCheckout.street}, {dataCheckout.houseNum || 'S/N'}
+                </Bold>{' '}
               </p>
-              <p>Farrapos - Porto Alegre, RS</p>
+              <p>
+                {dataCheckout.district} - {dataCheckout.city}, {dataCheckout.uf}
+              </p>
             </Text>
           </TextInfor>
           <TextInfor>

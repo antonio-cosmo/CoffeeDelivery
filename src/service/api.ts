@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { createServer, Model } from 'miragejs'
 import { coffes } from './data'
 
@@ -27,6 +28,8 @@ export function mockApi() {
         if (coffeExist) return coffeExist
         return null
       })
+
+      this.passthrough('https://viacep.com.br/ws/**')
     },
   })
 }

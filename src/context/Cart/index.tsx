@@ -11,41 +11,64 @@ interface MsgProps {
   msg: string
   type: 'success' | 'error' | 'info'
 }
+
+interface DataCheckout {
+  cep: string
+  street: string
+  houseNum: string
+  district: string
+  complement: string
+  city: string
+  uf: string
+}
+
 interface CartContextData {
   cart: Product[]
-  addProduct: (id: string, amount: number) => Promise<MsgProps>
+  dataCheckout: DataCheckout
+  addProduct: (id: string | null, amount: number) => Promise<MsgProps>
   removeProduct: (id: string) => MsgProps
+  createDataCheckout: (data: DataCheckout) => void
+  clearCart: () => void
 }
 
 const CartContext = createContext({} as CartContextData)
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Product[]>([])
+  const [dataCheckout, setDataChekout] = useState<DataCheckout>(
+    {} as DataCheckout,
+  )
 
-  const addProduct = async (id: string, amount: number) => {
-    const response = await axios.get(`/api/coffes/${id}`)
+  const createDataCheckout = (data: DataCheckout) => {
+    setDataChekout(data)
+  }
+  const addProduct = async (id: string | null, amount: number) => {
+    if (id) {
+      const response = await axios.get(`/api/coffes/${id}`)
 
-    const coffe: Coffe | null = response.data.coffe
+      const coffe: Coffe | null = response.data.coffe
 
-    if (coffe) {
-      const updateCart = [...cart]
-      const productExist = updateCart.find((coffe) => coffe.id === id)
-      if (productExist) {
-        productExist.amount = amount
-        setCart(updateCart)
-        const mensange: MsgProps = { msg: 'Produto atualizado', type: 'info' }
+      if (coffe) {
+        const updateCart = [...cart]
+        const productExist = updateCart.find((coffe) => coffe.id === id)
+        if (productExist) {
+          productExist.amount = amount
+          setCart(updateCart)
+          const mensange: MsgProps = { msg: 'Produto atualizado', type: 'info' }
 
-        return mensange
-      } else {
-        const coffeProduct: Product = { ...coffe, amount }
-        setCart((prevState) => [...cart, coffeProduct])
-        const mensange: MsgProps = {
-          msg: 'Produto adicionado',
-          type: 'success',
+          return mensange
+        } else {
+          const coffeProduct: Product = { ...coffe, amount }
+          setCart((prevState) => [...cart, coffeProduct])
+          const mensange: MsgProps = {
+            msg: 'Produto adicionado',
+            type: 'success',
+          }
+          return mensange
         }
-        return mensange
       }
     }
+
     const mensange: MsgProps = {
       msg: 'Produto não foi adicionado',
       type: 'error',
@@ -73,8 +96,21 @@ export function CartProvider({ children }: CartProviderProps) {
 
     return mensange
   }
+
+  const clearCart = () => {
+    setCart([])
+  }
   return (
-    <CartContext.Provider value={{ cart, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        dataCheckout,
+        addProduct,
+        removeProduct,
+        createDataCheckout,
+        clearCart,
+      }}
+    >
       {children}
     </CartContext.Provider>
   )

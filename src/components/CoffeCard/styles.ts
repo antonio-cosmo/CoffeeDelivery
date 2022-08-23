@@ -4,7 +4,7 @@ export const Card = styled.li`
   display: inline-block;
   width: 16rem;
   text-align: center;
-  position: relative;
+  /* position: relative; */
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
   border-top-right-radius: 36px;
@@ -108,6 +108,13 @@ export const ButtonCart = styled.button`
     border-radius: 6px;
     transition: 0.3s;
     &:hover {
+      background: ${(props) => props.theme.purple};
+    }
+  }
+
+  &:disabled {
+    svg {
+      cursor: not-allowed;
       background: ${(props) => props.theme.purple};
     }
   }

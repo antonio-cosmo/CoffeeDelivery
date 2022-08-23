@@ -52,7 +52,8 @@ export const BodyForm = styled.div`
       width: 100%;
 
       &:focus {
-        outline-color: ${(props) => props.theme['yellow-dark']};
+        outline: none;
+        box-shadow: 0 0 2px ${(props) => props.theme['yellow-dark']};
       }
     }
   }
