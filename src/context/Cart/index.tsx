@@ -1,6 +1,5 @@
 import axios from 'axios'
 import { createContext, ReactNode, useContext, useState } from 'react'
-import { toast } from 'react-toastify'
 import { Coffe } from '../../@types/coffe'
 import { Product } from '../../@types/product'
 
@@ -43,18 +42,23 @@ export function CartProvider({ children }: CartProviderProps) {
     setDataChekout(data)
   }
   const addProduct = async (id: string | null, amount: number) => {
+    if (amount === 0 && id) {
+      return removeProduct(id)
+    }
     if (id) {
       const response = await axios.get(`/api/coffes/${id}`)
 
       const coffe: Coffe | null = response.data.coffe
-
       if (coffe) {
         const updateCart = [...cart]
         const productExist = updateCart.find((coffe) => coffe.id === id)
         if (productExist) {
           productExist.amount = amount
           setCart(updateCart)
-          const mensange: MsgProps = { msg: 'Produto atualizado', type: 'info' }
+          const mensange: MsgProps = {
+            msg: 'Produto atualizado',
+            type: 'info',
+          }
 
           return mensange
         } else {
@@ -83,12 +87,16 @@ export function CartProvider({ children }: CartProviderProps) {
     if (indexForDel > -1) {
       updateCart.splice(indexForDel, 1)
       setCart(updateCart)
-      const mensange: MsgProps = { msg: 'Produto removido', type: 'success' }
+      const mensange: MsgProps = {
+        msg: 'Produto removido',
+        type: 'success',
+      }
 
       return mensange
-    } else {
-      toast.error('', { position: 'top-right' })
     }
+    // else {
+    //   toast.error('', { position: 'top-right' })
+    // }
     const mensange: MsgProps = {
       msg: 'Erro na remoção do produto',
       type: 'error',

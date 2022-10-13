@@ -1,6 +1,6 @@
 import { Plus, Minus, ShoppingCartSimple } from 'phosphor-react'
-import { useState } from 'react'
-import { toast } from 'react-toastify'
+import { useState, useRef } from 'react'
+import { toast, Id } from 'react-toastify'
 import { Coffe } from '../../@types/coffe'
 import { useCartContext } from '../../context/Cart'
 import { priceFormat } from '../../util/priceFormat'
@@ -36,7 +36,7 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
     return { id: null, count: 0, inCard: false }
   })
 
-  // const isInCart = Boolean(cart.find((value) => value.id === coffe.id))
+  const toastId = useRef<Id>('')
 
   const handleAddProduct = async (id: string | null, amount: number) => {
     if (amount <= 0) {
@@ -45,7 +45,11 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
     }
     const res = await addProduct(id, amount)
     setCountCoffeCard({ id, count: amount, inCard: true })
-    toast[res.type](res.msg, { position: 'top-right' })
+    if (!toast.isActive(toastId.current)) {
+      toastId.current = toast[res.type](res.msg, {
+        position: 'top-right',
+      })
+    }
   }
 
   const handleIncrementProduct = async () => {
@@ -57,7 +61,11 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
       })
 
       const res = await addProduct(countCoffeCard.id, amount)
-      toast[res.type](res.msg, { position: 'top-right' })
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast[res.type](res.msg, {
+          position: 'top-right',
+        })
+      }
       return
     }
     setCountCoffeCard((prevState) => {
@@ -67,19 +75,25 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
 
   const handleDecrementProduct = async () => {
     if (countCoffeCard.count === 0) return
-    if (countCoffeCard.count === 1) {
-      toast.info('Remova o item no carrinho', { position: 'top-right' })
-      return
-    }
+
     if (countCoffeCard.inCard) {
       const amount = countCoffeCard.count - 1
+
+      if (amount === 0) {
+        countCoffeCard.inCard = false
+      }
 
       setCountCoffeCard((prevState) => {
         return { ...prevState, count: prevState.count - 1 }
       })
 
       const res = await addProduct(countCoffeCard.id, amount)
-      toast[res.type](res.msg, { position: 'top-right' })
+      if (!toast.isActive(toastId.current)) {
+        toastId.current = toast[res.type](res.msg, {
+          position: 'top-right',
+        })
+      }
+
       return
     }
 
@@ -89,10 +103,6 @@ export function CoffeCard({ coffe }: CoffeCardProps) {
   }
   return (
     <Card>
-      {/* <CheckboxContainer>
-        <input type="checkbox" readOnly checked={isInCart} />
-        <span></span>
-      </CheckboxContainer> */}
       <CoffeImage>
         <img src={coffe.imageURL} alt="" />
         <div>

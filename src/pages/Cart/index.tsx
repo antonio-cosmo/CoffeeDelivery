@@ -63,7 +63,11 @@ export function Cart() {
             </div>
           </PayTotal>
 
-          <ButtonConfirm type="submit" form="checkout-form">
+          <ButtonConfirm
+            type="submit"
+            form="checkout-form"
+            disabled={!(cart.length > 0)}
+          >
             CONFIRMAR PEDIDO
           </ButtonConfirm>
         </Card>

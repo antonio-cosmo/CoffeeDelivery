@@ -8,7 +8,7 @@ export function DefaultLayout() {
     <LayoutContainer>
       <Header />
       <Outlet />
-      <ToastContainer autoClose={2000} />
+      <ToastContainer autoClose={2000} theme="dark" />
     </LayoutContainer>
   )
 }

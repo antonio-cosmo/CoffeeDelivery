@@ -57,4 +57,8 @@ export const ButtonConfirm = styled.button`
   &:hover {
     background: ${(props) => props.theme['yellow-dark']};
   }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
 `
