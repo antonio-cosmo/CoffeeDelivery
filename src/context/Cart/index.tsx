@@ -19,6 +19,7 @@ interface DataCheckout {
   complement: string
   city: string
   uf: string
+  pay: string
 }
 
 interface CartContextData {

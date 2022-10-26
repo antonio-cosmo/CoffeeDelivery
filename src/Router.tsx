@@ -10,7 +10,7 @@ export function Router() {
       <Route path="/" element={<DefaultLayout />}>
         <Route index element={<Home />} />
         <Route path="cart">
-          <Route path="" element={<Cart />} />
+          <Route index element={<Cart />} />
           <Route path="success" element={<Success />} />
         </Route>
       </Route>

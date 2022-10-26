@@ -49,7 +49,7 @@ export function Success() {
             <Text>
               <p>Pagamento na entrega</p>
               <p>
-                <Bold>Cartão de Crédito</Bold>
+                <Bold>{'Dinheiro' && dataCheckout.pay === 'debito' ? 'Cartão de Debito' : 'Cartão de Credito' }</Bold>
               </p>
             </Text>
           </TextInfor>

@@ -12,10 +12,14 @@ import { Item } from './Item'
 import { useCartContext } from '../../context/Cart'
 import { priceFormat } from '../../util/priceFormat'
 import { CheckoutForm } from './CheckoutForm'
-import { Pay } from './Pay'
+import { Pay } from './TypePay'
 
 export function Cart() {
   const { cart } = useCartContext()
+
+  const [typePay, setTypePay] = useState('')
+  
+  const taxa = 3.5
 
   const totalItems = cart.reduce((total, product) => {
     const productTotal: number = product.price * product.amount
@@ -23,14 +27,17 @@ export function Cart() {
     return (total += productTotal)
   }, 0)
 
-  const taxa = 3.5
+  const handleTypePay = (pay: string) => {
+    setTypePay(pay)
+  }
 
+  
   return (
     <Container>
       <Checkout>
         <h3>Complete seu pedido</h3>
-        <CheckoutForm />
-        <Pay />
+        <CheckoutForm pay={typePay} />
+        <Pay handleTypePay={handleTypePay} />
       </Checkout>
       <ItemsCart>
         <h3>Cafés selecionado</h3>

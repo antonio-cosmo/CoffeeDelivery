@@ -2,12 +2,10 @@ import { MapPinLine } from 'phosphor-react'
 import { FormContainer, BodyForm, GroupInput, HeaderForm } from './styles'
 import { useForm, FormProvider } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { ErrorMessage } from '@hookform/error-message'
 import * as z from 'zod'
 import { useNavigate } from 'react-router-dom'
 import { useCartContext } from '../../../context/Cart'
-import { useEffect, useState } from 'react'
-import axios from 'axios'
+import { useEffect} from 'react'
 
 const schema = z.object({
   cep: z.string().min(8),
@@ -28,7 +26,11 @@ interface DataCep {
   logradouro: string
   uf: string
 }
-export function CheckoutForm() {
+
+interface CheckoutFormProps{
+  pay: string
+}
+export function CheckoutForm({ pay }:CheckoutFormProps) {
   const { createDataCheckout, clearCart } = useCartContext()
 
   const navigate = useNavigate()
@@ -67,7 +69,7 @@ export function CheckoutForm() {
   }, [cep, setValue])
 
   const handleSubmitDataCheckout = (data: formDataCheckout) => {
-    createDataCheckout(data)
+    createDataCheckout({...data, pay})
     reset()
     clearCart()
     navigate('/cart/success/')

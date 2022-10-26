@@ -2,9 +2,13 @@ import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
 import { useState } from 'react'
 import { PayContainer, HeaderPay, PayTypeContainer, RadioBox } from './styles'
 
-export function Pay() {
+interface PayProps{
+  handleTypePay: (value: string)=> void
+}
+export function Pay({handleTypePay}:PayProps) {
   const [payType, setPayType] = useState('')
-
+  handleTypePay(payType)
+  
   return (
     <PayContainer>
       <HeaderPay>
