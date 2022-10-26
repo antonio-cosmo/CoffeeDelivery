@@ -49,7 +49,13 @@ export function Success() {
             <Text>
               <p>Pagamento na entrega</p>
               <p>
-                <Bold>{'Dinheiro' && dataCheckout.pay === 'debito' ? 'Cartão de Debito' : 'Cartão de Credito' }</Bold>
+                <Bold>
+                  {dataCheckout.pay === 'debito' 
+                    ? 'Cartão de Debito' 
+                    : dataCheckout.pay === 'credito' 
+                    ? 'Cartão de Credito' 
+                    : 'Dinheiro' }
+                </Bold>
               </p>
             </Text>
           </TextInfor>
