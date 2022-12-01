@@ -14,6 +14,14 @@ export const Container = styled.div`
       margin-bottom: 16px;
     }
   }
+
+  @media (max-width:1024px){
+    flex-wrap:wrap;
+  }
+
+  @media (max-width: 640px){
+    margin-top: 7rem;
+  }
 `
 export const Checkout = styled.div`
   width: 40rem;

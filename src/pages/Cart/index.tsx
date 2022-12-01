@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import {
   Container,
   Checkout,
@@ -8,36 +7,25 @@ import {
   PayTotal,
   ButtonConfirm,
 } from './styles'
-import { Item } from './Item'
+import { Item } from './components/Item'
 import { useCartContext } from '../../context/Cart'
 import { priceFormat } from '../../util/priceFormat'
-import { CheckoutForm } from './CheckoutForm'
-import { Pay } from './TypePay'
+import { CheckoutForm } from './components/CheckoutForm'
 
 export function Cart() {
   const { cart } = useCartContext()
-
-  const [typePay, setTypePay] = useState('')
   
   const taxa = 3.5
 
-  const totalItems = cart.reduce((total, product) => {
-    const productTotal: number = product.price * product.amount
-
-    return (total += productTotal)
+  const totalItems = cart.reduce((acc, product) => {
+    return acc +=  product.total
   }, 0)
-
-  const handleTypePay = (pay: string) => {
-    setTypePay(pay)
-  }
-
   
   return (
     <Container>
       <Checkout>
         <h3>Complete seu pedido</h3>
-        <CheckoutForm pay={typePay} />
-        <Pay handleTypePay={handleTypePay} />
+        <CheckoutForm />
       </Checkout>
       <ItemsCart>
         <h3>Cafés selecionado</h3>

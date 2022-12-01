@@ -11,7 +11,7 @@ import imgEntregador from '../../../assets/images/Entrega.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useCartContext } from '../../../context/Cart'
 export function Success() {
-  const { dataCheckout } = useCartContext()
+  const { checkoutData } = useCartContext()
   return (
     <Conatainer>
       <TextSuccess>
@@ -26,11 +26,11 @@ export function Success() {
               <p>
                 Entrega em{' '}
                 <Bold>
-                  {dataCheckout.street}, {dataCheckout.houseNum || 'S/N'}
+                  {checkoutData.street}, {checkoutData.houseNum || 'S/N'}
                 </Bold>{' '}
               </p>
               <p>
-                {dataCheckout.district} - {dataCheckout.city}, {dataCheckout.uf}
+                {checkoutData.district} - {checkoutData.city}, {checkoutData.uf}
               </p>
             </Text>
           </TextInfor>
@@ -50,9 +50,9 @@ export function Success() {
               <p>Pagamento na entrega</p>
               <p>
                 <Bold>
-                  {dataCheckout.pay === 'debito' 
+                  {checkoutData.pay === 'debito' 
                     ? 'Cartão de Debito' 
-                    : dataCheckout.pay === 'credito' 
+                    : checkoutData.pay === 'credito' 
                     ? 'Cartão de Credito' 
                     : 'Dinheiro' }
                 </Bold>

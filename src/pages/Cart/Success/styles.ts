@@ -8,6 +8,7 @@ export const Conatainer = styled.div`
 `
 
 export const TextSuccess = styled.div``
+
 export const Header = styled.div`
   margin-bottom: 40px;
   h2 {

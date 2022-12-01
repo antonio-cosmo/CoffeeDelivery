@@ -1,11 +1,12 @@
 import { MapPinLine } from 'phosphor-react'
-import { FormContainer, BodyForm, GroupInput, HeaderForm } from './styles'
-import { useForm, FormProvider } from 'react-hook-form'
+import { FormContainer, BodyForm, GroupInput, HeaderForm, PayContent } from './styles'
+import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
 import { useNavigate } from 'react-router-dom'
-import { useCartContext } from '../../../context/Cart'
-import { useEffect} from 'react'
+import { useCartContext } from '../../../../context/Cart'
+import { useEffect, useState} from 'react'
+import { PayType } from '../PayType'
 
 const schema = z.object({
   cep: z.string().min(8),
@@ -30,9 +31,12 @@ interface DataCep {
 interface CheckoutFormProps{
   pay: string
 }
-export function CheckoutForm({ pay }:CheckoutFormProps) {
-  const { createDataCheckout, clearCart } = useCartContext()
-
+export function CheckoutForm() {
+  const { createCheckoutData, clearCart, cart } = useCartContext()
+  const [payType, setPayType] = useState('')
+  const handlePayType = (pay: string) => {
+    setPayType(pay)
+  }
   const navigate = useNavigate()
 
   const formCycle = useForm<formDataCheckout>({
@@ -50,6 +54,7 @@ export function CheckoutForm({ pay }:CheckoutFormProps) {
   const cep = watch('cep')
 
   const lengthCep = 9
+
   useEffect(() => {
     if (cep) {
       let cepMask = cep.replace(/D/g, '')
@@ -69,11 +74,16 @@ export function CheckoutForm({ pay }:CheckoutFormProps) {
   }, [cep, setValue])
 
   const handleSubmitDataCheckout = (data: formDataCheckout) => {
-    createDataCheckout({...data, pay})
+    const totalCart = cart.reduce((acc, value) => {
+      return value.total + acc
+    }, 0)
+    createCheckoutData({...data, pay:payType, products: cart, totalCart})
     reset()
     clearCart()
     navigate('/cart/success/')
   }
+
+
   return (
     <FormContainer
       id="checkout-form"
@@ -132,6 +142,9 @@ export function CheckoutForm({ pay }:CheckoutFormProps) {
             <input type="text" placeholder="UF" required {...register('uf')} />
           </label>
         </GroupInput>
+        <PayContent>
+          <PayType handlePayType={handlePayType} payType={payType} />
+        </PayContent>
       </BodyForm>
     </FormContainer>
   )

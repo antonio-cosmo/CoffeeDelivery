@@ -4,6 +4,10 @@ export const FormContainer = styled.form`
   padding: 40px;
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
+
+  @media (max-width: 640px){
+    padding: 15px;
+  }
 `
 
 const baseHeader = styled.div`
@@ -95,4 +99,9 @@ export const GroupInput = styled.div`
   label:nth-child(3) {
     flex: 1;
   }
+`
+
+export const PayContent = styled.div`
+  width: 100%; 
+  margin-top: 2rem;
 `

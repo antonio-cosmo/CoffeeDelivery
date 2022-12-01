@@ -2,14 +2,15 @@ import styled from 'styled-components'
 
 export const PayContainer = styled.div`
   margin: 12px 0 12px 0;
-  padding: 40px;
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
+  width: 100%;
 `
 export const PayTypeContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 10px;
 `
 
 interface RadioBoxProps {

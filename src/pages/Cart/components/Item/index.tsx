@@ -1,30 +1,29 @@
 import { Minus, Plus, Trash } from 'phosphor-react'
 import { Actions, ButtonCart, ItemCard } from './styles'
-import { Product } from '../../../@types/product'
-import { useCartContext } from '../../../context/Cart'
-import { priceFormat } from '../../../util/priceFormat'
+import { useCartContext } from '../../../../context/Cart'
+import { priceFormat } from '../../../../util/priceFormat'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
+import { Product } from '../../../../context/Cart/interfaces'
 
 interface ItemProps {
   product: Product
 }
 export function Item({ product }: ItemProps) {
-  const { addProduct, removeProduct } = useCartContext()
+  const { removeProduct, updateProduct } = useCartContext()
   const [count, setCount] = useState(product.amount)
-  const price = product.amount * product.price
 
   const handleIncrementProduct = (id: string) => {
     const amount = product.amount + 1
     setCount(amount)
-    addProduct(id, amount)
+    updateProduct(id, amount)
   }
 
   const handleDecrementProduct = (id: string) => {
     if (product.amount <= 1 && count <= 1) return
     const amount = product.amount - 1
     setCount(amount)
-    addProduct(id, amount)
+    updateProduct(id, amount)
   }
 
   const handleRemoveProduct = (id: string) => {
@@ -53,7 +52,7 @@ export function Item({ product }: ItemProps) {
           </ButtonCart>
         </Actions>
       </div>
-      <p className="total">{priceFormat(price)}</p>
+      <p className="total">{priceFormat(product.total)}</p>
     </ItemCard>
   )
 }

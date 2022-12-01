@@ -11,7 +11,7 @@ import coffeImg from '../../assets/images/Coffe.svg'
 import { CoffeCard } from '../../components/CoffeCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Coffe } from '../../@types/coffe'
+import { Coffe } from '../../context/Cart/interfaces'
 
 export function Home() {
   const [coffes, setCoffes] = useState<Coffe[]>([])

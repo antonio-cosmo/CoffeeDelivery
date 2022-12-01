@@ -4,7 +4,6 @@ export const Card = styled.li`
   display: inline-block;
   width: 16rem;
   text-align: center;
-  /* position: relative; */
   background: ${(props) => props.theme['base-card']};
   border-radius: 6px;
   border-top-right-radius: 36px;
@@ -50,6 +49,15 @@ export const Description = styled.div`
     font-size: 14px;
     color: ${(props) => props.theme['base-label']};
     line-height: 1.3;
+  }
+
+  @media (max-width: 992px){
+    h3{
+      font-size: 18px;
+    }
+    p{
+      font-size: 12px;
+    }
   }
 `
 export const Buy = styled.div`

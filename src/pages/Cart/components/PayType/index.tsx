@@ -1,13 +1,11 @@
 import { Bank, CreditCard, CurrencyDollar, Money } from 'phosphor-react'
-import { useState } from 'react'
 import { PayContainer, HeaderPay, PayTypeContainer, RadioBox } from './styles'
 
 interface PayProps{
-  handleTypePay: (value: string)=> void
+  handlePayType: (value: string)=> void
+  payType: string
 }
-export function Pay({handleTypePay}:PayProps) {
-  const [payType, setPayType] = useState('')
-  handleTypePay(payType)
+export function PayType({handlePayType,payType}:PayProps) {
   
   return (
     <PayContainer>
@@ -23,7 +21,7 @@ export function Pay({handleTypePay}:PayProps) {
       <PayTypeContainer>
         <RadioBox
           type="button"
-          onClick={() => setPayType('credito')}
+          onClick={() => handlePayType('credito')}
           isActive={payType === 'credito'}
         >
           <CreditCard size={16} />
@@ -32,7 +30,7 @@ export function Pay({handleTypePay}:PayProps) {
 
         <RadioBox
           type="button"
-          onClick={() => setPayType('debito')}
+          onClick={() => handlePayType('debito')}
           isActive={payType === 'debito'}
         >
           <Bank size={16} />
@@ -41,7 +39,7 @@ export function Pay({handleTypePay}:PayProps) {
 
         <RadioBox
           type="button"
-          onClick={() => setPayType('dinheiro')}
+          onClick={() => handlePayType('dinheiro')}
           isActive={payType === 'dinheiro'}
         >
           <Money size={16} />
