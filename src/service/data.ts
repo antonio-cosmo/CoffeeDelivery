@@ -13,7 +13,7 @@ import havaiano from '../assets/images/Havaiano.svg'
 import arabe from '../assets/images/Arabe.svg'
 import irlandes from '../assets/images/Irlandes.svg'
 
-export const coffes = [
+export const coffees = [
   {
     id: 1,
     imageURL: expresso,

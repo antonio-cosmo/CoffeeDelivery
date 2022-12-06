@@ -10,6 +10,7 @@ import {
 import imgEntregador from '../../../assets/images/Entrega.svg'
 import { CurrencyDollar, MapPin, Timer } from 'phosphor-react'
 import { useCartContext } from '../../../context/Cart'
+
 export function Success() {
   const { checkoutData } = useCartContext()
   return (

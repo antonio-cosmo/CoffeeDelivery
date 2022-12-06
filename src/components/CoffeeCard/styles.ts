@@ -11,7 +11,7 @@ export const Card = styled.li`
   padding: 0 20px 20px 20px;
 `
 
-export const CoffeImage = styled.div`
+export const CoffeeImage = styled.div`
   margin-top: -20px;
   img {
     margin-bottom: 10px;

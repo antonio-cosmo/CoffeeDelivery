@@ -7,19 +7,19 @@ import {
   Beneficios,
   ListCoffe,
 } from './styles'
-import coffeImg from '../../assets/images/Coffe.svg'
-import { CoffeCard } from '../../components/CoffeCard'
+import coffeeImg from '../../assets/images/Coffe.svg'
+import { CoffeeCard } from '../../components/CoffeeCard'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-import { Coffe } from '../../context/Cart/interfaces'
+import { ICoffee } from '../../context/Cart/interfaces'
 
 export function Home() {
-  const [coffes, setCoffes] = useState<Coffe[]>([])
+  const [coffees, setCoffees] = useState<ICoffee[]>([])
   useEffect(() => {
     ;(async () => {
-      const res = await axios.get('/api/coffes/')
-      const { coffes } = res.data
-      setCoffes(coffes)
+      const res = await axios.get('/api/coffees/')
+      const { coffees } = res.data
+      setCoffees(coffees)
     })()
   }, [])
 
@@ -58,15 +58,15 @@ export function Home() {
           </Beneficios>
         </Text>
         <ImageCoffe>
-          <img src={coffeImg} alt="" />
+          <img src={coffeeImg} alt="" />
         </ImageCoffe>
       </Banner>
 
       <ListCoffe>
         <h2>Nossos cafés</h2>
         <ul>
-          {coffes.map((coffe) => {
-            return <CoffeCard key={coffe.id} coffe={coffe} />
+          {coffees.map((coffee) => {
+            return <CoffeeCard key={coffee.id} coffee={coffee} />
           })}
         </ul>
       </ListCoffe>

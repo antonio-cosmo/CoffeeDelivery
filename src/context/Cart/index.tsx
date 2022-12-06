@@ -1,16 +1,16 @@
 import axios from 'axios'
 import { createContext, ReactNode, useContext, useState } from 'react'
-import { Coffe, Product } from './interfaces'
+import { ICoffee, IProduct } from './interfaces'
 
-interface CartProviderProps {
+interface ICartProviderProps {
   children: ReactNode
 }
-interface MsgProps {
+interface IMsgProps {
   msg: string
   type: 'success' | 'error' | 'info'
 }
 
-interface CheckoutData {
+interface ICheckoutData {
   cep: string
   street: string
   houseNum: string
@@ -19,31 +19,31 @@ interface CheckoutData {
   city: string
   uf: string
   pay: string
-  products: Product[]
+  products: IProduct[]
   totalCart: number
 }
 
-interface CartContextData {
-  cart: Product[]
-  checkoutData: CheckoutData
-  addProduct: (id: string, amount: number) => Promise<MsgProps>
-  updateProduct: (id: string, amount: number) => Promise<MsgProps>
-  removeProduct: (id: string) => MsgProps
-  createCheckoutData: (data: CheckoutData) => void
+interface ICartContextData {
+  cart: IProduct[]
+  checkoutData: ICheckoutData
+  addProduct: (id: string, amount: number) => Promise<IMsgProps>
+  updateProduct: (id: string, amount: number) => Promise<IMsgProps>
+  removeProduct: (id: string) => IMsgProps
+  createCheckoutData: (data: ICheckoutData) => void
   clearCart: () => void
 }
 
-const CartContext = createContext({} as CartContextData)
+const CartContext = createContext({} as ICartContextData)
 
-export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useState<Product[]>(()=>{
+export function CartProvider({ children }: ICartProviderProps) {
+  const [cart, setCart] = useState<IProduct[]>(()=>{
     const storageCart = localStorage.getItem('cart')
     if(!storageCart) return []
     return JSON.parse(storageCart)
   })
   
-  const [checkoutData, setChekoutData] = useState<CheckoutData>(
-    {} as CheckoutData,
+  const [checkoutData, setChekoutData] = useState<ICheckoutData>(
+    {} as ICheckoutData,
   )
   
   const setLocalStorage = (key: string, value: any) => {
@@ -51,22 +51,22 @@ export function CartProvider({ children }: CartProviderProps) {
     localStorage.setItem(key, newValue)
   }
 
-  const createCheckoutData = (data: CheckoutData) => {
+  const createCheckoutData = (data: ICheckoutData) => {
     setChekoutData(data)
   }
   const addProduct = async (id: string, amount: number) => {
     if (amount === 0) {
       return removeProduct(id)
     }
-      const response = await axios.get(`/api/coffes/${id}`)
+      const response = await axios.get(`/api/coffees/${id}`)
 
-      const coffe: Coffe | null = response.data.coffe
-      if (coffe) {
-          const total = coffe.price * amount
-          const coffeProduct: Product = { ...coffe, amount, total }
-          setCart((prevState) => [...prevState, coffeProduct])
-          setLocalStorage('cart', [...cart, coffeProduct])
-          const mensange: MsgProps = {
+      const coffee: ICoffee | null = response.data.coffee
+      if (coffee) {
+          const total = coffee.price * amount
+          const coffeeProduct: IProduct = { ...coffee, amount, total }
+          setCart((prevState) => [...prevState, coffeeProduct])
+          setLocalStorage('cart', [...cart, coffeeProduct])
+          const mensange: IMsgProps = {
             msg: 'Produto adicionado',
             type: 'success',
           }
@@ -75,7 +75,7 @@ export function CartProvider({ children }: CartProviderProps) {
       }
     
 
-    const mensange: MsgProps = {
+    const mensange: IMsgProps = {
       msg: 'Produto não foi adicionado',
       type: 'error',
     }
@@ -90,7 +90,7 @@ export function CartProvider({ children }: CartProviderProps) {
       updateCart.splice(indexForDel, 1)
       setCart(updateCart)
       setLocalStorage('cart', updateCart)
-      const mensange: MsgProps = {
+      const mensange: IMsgProps = {
         msg: 'Produto removido',
         type: 'success',
       }
@@ -98,7 +98,7 @@ export function CartProvider({ children }: CartProviderProps) {
       return mensange
     }
 
-    const mensange: MsgProps = {
+    const mensange: IMsgProps = {
       msg: 'Erro na remoção do produto',
       type: 'error',
     }
@@ -110,11 +110,11 @@ export function CartProvider({ children }: CartProviderProps) {
     if (amount === 0 && id) {
       return removeProduct(id)
     }
-    const response = await axios.get(`/api/coffes/${id}`)
-    const coffe: Coffe | null = response.data.coffe
-    if (coffe) {
+    const response = await axios.get(`/api/coffees/${id}`)
+    const coffee: ICoffee | null = response.data.coffee
+    if (coffee) {
       const updateCart = [...cart]
-      const productExist = updateCart.find((coffe) => coffe.id === id)
+      const productExist = updateCart.find((coffee) => coffee.id === id)
       if (productExist) {
 
         productExist.amount = amount
@@ -122,7 +122,7 @@ export function CartProvider({ children }: CartProviderProps) {
 
         setCart(updateCart)
         setLocalStorage('cart', updateCart)
-        const mensange: MsgProps = {
+        const mensange: IMsgProps = {
           msg: 'Produto atualizado',
           type: 'info',
         }
@@ -131,7 +131,7 @@ export function CartProvider({ children }: CartProviderProps) {
       }
     }
 
-    const mensange: MsgProps = {
+    const mensange: IMsgProps = {
       msg: 'Produto não foi adicionado',
       type: 'error',
     }

@@ -4,12 +4,12 @@ import { useCartContext } from '../../../../context/Cart'
 import { priceFormat } from '../../../../util/priceFormat'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { Product } from '../../../../context/Cart/interfaces'
+import { IProduct } from '../../../../context/Cart/interfaces'
 
-interface ItemProps {
-  product: Product
+interface IItemProps {
+  product: IProduct
 }
-export function Item({ product }: ItemProps) {
+export function Item({ product }: IItemProps) {
   const { removeProduct, updateProduct } = useCartContext()
   const [count, setCount] = useState(product.amount)
 

@@ -1,30 +1,30 @@
 import { createServer, Model } from 'miragejs'
-import { coffes } from './data'
+import { coffees } from './data'
 
 export function mockApi() {
   createServer({
     models: {
-      coffe: Model,
+      coffee: Model,
     },
 
     seeds(server) {
       server.db.loadData({
-        coffes: [...coffes],
+        coffees: [...coffees],
       })
     },
 
     routes() {
       this.namespace = 'api'
 
-      this.get('/coffes', () => {
-        return this.schema.all('coffe')
+      this.get('/coffees', () => {
+        return this.schema.all('coffee')
       })
 
-      this.get('/coffes/:id', (schema, resquest) => {
-        const coffeID = resquest.params.id
-        const coffeExist = schema.find('coffe', coffeID)
+      this.get('/coffees/:id', (schema, resquest) => {
+        const coffeeID = resquest.params.id
+        const coffeeExist = schema.find('coffee', coffeeID)
 
-        if (coffeExist) return coffeExist
+        if (coffeeExist) return coffeeExist
         return null
       })
 

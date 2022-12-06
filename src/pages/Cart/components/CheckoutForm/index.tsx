@@ -28,9 +28,6 @@ interface DataCep {
   uf: string
 }
 
-interface CheckoutFormProps{
-  pay: string
-}
 export function CheckoutForm() {
   const { createCheckoutData, clearCart, cart } = useCartContext()
   const [payType, setPayType] = useState('')

@@ -1,4 +1,4 @@
-export interface Coffe {
+export interface ICoffee {
     id: string
     imageURL: string
     tags: string[]
@@ -9,6 +9,6 @@ export interface Coffe {
 }
 
 
-export interface Product extends Coffe {
+export interface IProduct extends ICoffee {
   amount: number
 }
